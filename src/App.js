@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Link, Route, Switch } from "react-router-dom";
+import Home from "./Components/Home";
+import Register from "./Components/Register";
+import Dashboard from "./Components/Dashboard";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+        <div className="container-fluid">
+          <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item">
+                <Link className="nav-link" to="/home">
+                  Home
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/register">
+                  Register
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/dashboard">
+                  Dashboard
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <Switch>
+        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/register" component={Register} />
+        <Route path="/" component={Home} />
+      </Switch>
+    </>
   );
-}
+};
 
 export default App;
