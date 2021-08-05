@@ -54,17 +54,11 @@ const FullStack = (props) => {
                         </button>
                       </div>
                     ) : d.status === "shortlisted" ? (
-                      <button
-                        className="btn btn-sm btn-success"
-                        onClick={() => handleChange1(d._id, UpdateStatus)}
-                      >
+                      <button className="btn btn-sm btn-success">
                         shortlisted
                       </button>
                     ) : (
-                      <button
-                        className="btn btn-sm btn-danger"
-                        onClick={() => handleChange2(d._id, UpdateStatus)}
-                      >
+                      <button className="btn btn-sm btn-danger">
                         rejected
                       </button>
                     )}

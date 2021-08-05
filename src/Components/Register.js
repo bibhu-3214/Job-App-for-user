@@ -1,5 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { Formik, Form, Field, FieldArray, ErrorMessage } from "formik";
+import * as yup from "yup";
+import TextError from "./TextError";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -8,6 +11,16 @@ const Register = () => {
   const [jobTitle, setJobTitle] = useState("");
   const [experience, setExperiance] = useState("");
   const [skills, setSkils] = useState("");
+
+  const initialValues = {
+    FullName: "",
+    Email: "",
+  };
+
+  const validationSchema = yup.object({
+    FullName: yup.string().required("Required"),
+    Email: yup.string().email("Invalid Format").required("Required"),
+  });
 
   const handleChange = (e) => {
     if (e.target.name === "FullName") {
@@ -52,109 +65,124 @@ const Register = () => {
   return (
     <div className="container w-50">
       <h1 className="display-3 text-center my-5">Registration Form</h1>
-      <form onSubmit={handleSubmit} className="align-items-center">
-        <div className="row mb-4">
-          <label className="form-label">FullName</label>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        <Form>
+          <div className="row mb-4">
+            <label className="form-label" htmlFor="FullName">
+              FullName
+            </label>{" "}
+            <br />
+            <div className="col-12">
+              <Field
+                className="form-control"
+                type="text"
+                name="FullName"
+                id="FullName"
+                value={name}
+                onChange={handleChange}
+                placeholder="Enter your FullName"
+              />{" "}
+              <br />
+              <ErrorMessage name="FullName" component={TextError} />
+            </div>
+          </div>
+
+          <div className="row mb-4">
+            <label className="form-label" htmlFor="Email">
+              Email
+            </label>
+            <div className="col-12">
+              <Field
+                className="form-control"
+                type="email"
+                name="Email"
+                id="Email"
+                value={email}
+                onChange={handleChange}
+                placeholder="example@email.com"
+              />
+              <ErrorMessage name="Email" component={TextError} />
+            </div>
+          </div>
+
+          <div className="row mb-4">
+            <label className="form-label">Contact Number</label>
+            <div className="col-12">
+              <Field
+                className="form-control"
+                type="tel"
+                pattern="[0-9]{10}"
+                name="contact"
+                value={phone}
+                onChange={handleChange}
+                placeholder="+91-9876543210"
+                // required
+              />
+            </div>
+          </div>
+
+          <div className="row mb-4">
+            <label className="form-label">Appling for Job</label>
+            <div className="col-12">
+              <select
+                className="form-select"
+                aria-label=".form-select-lg example"
+                name="Select"
+                value={jobTitle}
+                onChange={handleChange}
+                required
+              >
+                <option>Front-End Developer</option>
+                <option>Node.js Developer</option>
+                <option>MEAN Stack Developer</option>
+                <option>FULL Stack Developer</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="row mb-4">
+            <label className="form-label">Experience</label>
+            <div className="col-12">
+              <Field
+                className="form-control"
+                type="text"
+                name="Experiance"
+                value={experience}
+                onChange={handleChange}
+                placeholder="Experiance(2years,3months)"
+                // required
+              />
+            </div>
+          </div>
+
+          <div className="row mb-4">
+            <label className="form-label">Technical Skils</label>
+            <div className="col-12">
+              <Field
+                as="textarea"
+                className="form-control"
+                name="Skills"
+                value={skills}
+                onChange={handleChange}
+                placeholder="Technical Skils"
+                // required
+              />
+            </div>
+          </div>
+
           <div className="col-12">
             <input
-              className="form-control"
-              type="text"
-              name="FullName"
-              value={name}
-              onChange={handleChange}
-              placeholder="Enter your FullName"
-              required
+              className="btn btn-primary mb-4"
+              type="submit"
+              value="Send Application"
             />
           </div>
-        </div>
-
-        <div className="row mb-4">
-          <label className="form-label">Email</label>
-          <div className="col-12">
-            <input
-              className="form-control"
-              type="email"
-              name="Email"
-              value={email}
-              onChange={handleChange}
-              placeholder="example@email.com"
-              required
-            />
-          </div>
-        </div>
-
-        <div className="row mb-4">
-          <label className="form-label">Contact Number</label>
-          <div className="col-12">
-            <input
-              className="form-control"
-              type="tel"
-              pattern="[0-9]{10}"
-              name="contact"
-              value={phone}
-              onChange={handleChange}
-              placeholder="+91-9876543210"
-              required
-            />
-          </div>
-        </div>
-
-        <div className="row mb-4">
-          <label className="form-label">Appling for Job</label>
-          <div className="col-12">
-            <select
-              className="form-select"
-              aria-label=".form-select-lg example"
-              name="Select"
-              value={jobTitle}
-              onChange={handleChange}
-              required
-            >
-              <option>Front-End Developer</option>
-              <option>Node.js Developer</option>
-              <option>MEAN Stack Developer</option>
-              <option>FULL Stack Developer</option>
-            </select>
-          </div>
-        </div>
-
-        <div className="row mb-4">
-          <label className="form-label">Experience</label>
-          <div className="col-12">
-            <input
-              className="form-control"
-              type="text"
-              name="Experiance"
-              value={experience}
-              onChange={handleChange}
-              placeholder="Experiance(2years,3months)"
-              required
-            />
-          </div>
-        </div>
-
-        <div className="row mb-5">
-          <label className="form-label">Technical Skils</label>
-          <div className="col-12">
-            <textarea
-              className="form-control"
-              name="Skills"
-              value={skills}
-              onChange={handleChange}
-              placeholder="Technical Skils"
-              required
-            />
-          </div>
-        </div>
-
-        <div className="col-12">
-          <input
-            className="btn btn-primary mb-4"
-            type="submit"
-            value="Send Application"
-          />
-        </div>
-      </form>
+        </Form>
+      </Formik>
     </div>
   );
 };
