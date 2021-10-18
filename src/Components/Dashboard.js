@@ -1,6 +1,6 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { Link, Route, Switch } from "react-router-dom";
+import React,{ useState } from "react";
+import { Link,Route,Switch } from "react-router-dom";
 import ReactModal from "react-modal";
 import FrontEnd from "./Dashboard Components/FrontEnd";
 import FullStack from "./Dashboard Components/FullStack";
@@ -9,10 +9,10 @@ import Node from "./Dashboard Components/Node";
 import ModalComponent from "./Dashboard Components/ModalComponent";
 
 const Dashboard = () => {
-  const [data, setData] = useState([]);
-  const [result, setResult] = useState({});
-  const [updateStatus, setUpdateStatus] = useState({});
-  const [isOpen, setIsOpen] = useState(false);
+  const [data,setData] = useState([]);
+  const [result,setResult] = useState({});
+  const [updateStatus,setUpdateStatus] = useState({});
+  const [isOpen,setIsOpen] = useState(false);
 
   const CustomStyle = {
     content: {
@@ -93,17 +93,17 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="container mt-5">
-        <Link to="/dashboard/frontend" className="btn btn-lg btn-primary me-5">
+      <div className="container mt-5" style={{ display: "flex",flexWrap: "wrap",justifyContent: "space-between",alignItems: "center" }}>
+        <Link to="/dashboard/frontend" className="btn btn-lg btn-primary">
           FrontEnd Developer
         </Link>
-        <Link to="/dashboard/nodejs" className="btn btn-lg btn-primary me-5">
+        <Link to="/dashboard/nodejs" className="btn btn-lg btn-primary">
           Node.js Developer
         </Link>
-        <Link to="/dashboard/meanstack" className="btn btn-lg btn-primary me-5">
+        <Link to="/dashboard/meanstack" className="btn btn-lg btn-primary">
           Mean Stack Developer
         </Link>
-        <Link to="/dashboard/fullstack" className="btn btn-lg btn-primary me-5">
+        <Link to="/dashboard/fullstack" className="btn btn-lg btn-primary">
           Full Stack Developer
         </Link>
       </div>
