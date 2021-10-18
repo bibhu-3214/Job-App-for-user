@@ -94,40 +94,18 @@ const Dashboard = () => {
   return (
     <>
       <div className="container mt-5">
-        <ul className="nav nav-pills">
-          <li className="nav-item">
-            <Link
-              to="/dashboard/frontend"
-              className="btn btn-lg btn-secondary me-5"
-            >
-              FrontEnd Developer
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link
-              to="/dashboard/nodejs"
-              className="btn btn-lg btn-secondary me-5"
-            >
-              Node.js Developer
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link
-              to="/dashboard/meanstack"
-              className="btn btn-lg btn-secondary me-5"
-            >
-              Mean Stack Developer
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link
-              to="/dashboard/fullstack"
-              className="btn btn-lg btn-secondary me-5"
-            >
-              Full Stack Developer
-            </Link>
-          </li>
-        </ul>
+        <Link to="/dashboard/frontend" className="btn btn-lg btn-primary me-5">
+          FrontEnd Developer
+        </Link>
+        <Link to="/dashboard/nodejs" className="btn btn-lg btn-primary me-5">
+          Node.js Developer
+        </Link>
+        <Link to="/dashboard/meanstack" className="btn btn-lg btn-primary me-5">
+          Mean Stack Developer
+        </Link>
+        <Link to="/dashboard/fullstack" className="btn btn-lg btn-primary me-5">
+          Full Stack Developer
+        </Link>
       </div>
 
       <Switch>
@@ -189,76 +167,12 @@ const Dashboard = () => {
           }}
         />
       </Switch>
-      <div className="container-fluid my-5">
-        <h1 className="display-4 text-black-50 text-center mb-5">
-          Total Candidates Applied for JOB - {data.length}
-        </h1>
-        <table className="table table-striped table-borderless">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Technical Skils</th>
-              <th>Experience</th>
-              <th>Applied Date</th>
-              <th>View Details</th>
-              <th>Application Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((d, id) => {
-              return (
-                <tr key={id}>
-                  <td>{d.name}</td>
-                  <td>{d.skills}</td>
-                  <td>{d.experience}</td>
-                  <td>{d.createdAt}</td>
-                  <td>
-                    <button
-                      className="btn btn-sm btn-primary"
-                      onClick={() => handleClick(d._id)}
-                    >
-                      Details
-                    </button>
-                  </td>
-                  <td>
-                    {d.status === "applied" ? (
-                      <div>
-                        <button className="btn btn-sm btn-success">
-                          shortlist
-                        </button>
-                        <button className="btn btn-sm btn-danger">
-                          reject
-                        </button>
-                      </div>
-                    ) : d.status === "shortlisted" ? (
-                      <button className="btn btn-sm btn-success">
-                        shortlisted
-                      </button>
-                    ) : (
-                      <button className="btn btn-sm btn-danger">
-                        rejected
-                      </button>
-                    )}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-
       <ReactModal
         isOpen={isOpen}
         style={CustomStyle}
         onRequestClose={handleClose}
       >
-        <ModalComponent
-          result={result}
-          handleClose={handleClose}
-          handleChange1={handleChange1}
-          handleChange2={handleChange2}
-          updateStatus={updateStatus}
-        />
+        <ModalComponent result={result} />
       </ReactModal>
     </>
   );

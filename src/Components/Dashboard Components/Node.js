@@ -55,11 +55,17 @@ const Node = (props) => {
                         </button>
                       </div>
                     ) : d.status === "shortlisted" ? (
-                      <button className="btn btn-sm btn-success">
+                      <button
+                        className="btn btn-sm btn-success"
+                        onClick={() => handleChange1(d._id, UpdateStatus)}
+                      >
                         shortlisted
                       </button>
                     ) : (
-                      <button className="btn btn-sm btn-danger">
+                      <button
+                        className="btn btn-sm btn-danger"
+                        onClick={() => handleChange2(d._id, UpdateStatus)}
+                      >
                         rejected
                       </button>
                     )}

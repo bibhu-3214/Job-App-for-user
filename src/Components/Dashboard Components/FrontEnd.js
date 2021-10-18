@@ -42,24 +42,30 @@ const FrontEnd = (props) => {
                     {d.status === "applied" ? (
                       <div>
                         <button
-                          className="btn btn-sm btn-success"
+                          className="btn btn-sm btn-outline-success"
                           onClick={() => handleChange2(d._id, UpdateStatus)}
                         >
                           shortlist
                         </button>
                         <button
-                          className="btn btn-sm btn-danger"
+                          className="btn btn-sm btn-outline-danger"
                           onClick={() => handleChange1(d._id, UpdateStatus)}
                         >
                           reject
                         </button>
                       </div>
                     ) : d.status === "shortlisted" ? (
-                      <button className="btn btn-sm btn-success">
+                      <button
+                        className="btn btn-sm btn-success"
+                        onClick={() => handleChange1(d._id, UpdateStatus)}
+                      >
                         shortlisted
                       </button>
                     ) : (
-                      <button className="btn btn-sm btn-danger">
+                      <button
+                        className="btn btn-sm btn-danger"
+                        onClick={() => handleChange2(d._id, UpdateStatus)}
+                      >
                         rejected
                       </button>
                     )}

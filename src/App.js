@@ -7,11 +7,11 @@ import Dashboard from "./Components/Dashboard";
 const App = () => {
   return (
     <>
-      <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
+      <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul className="navbar-nav mr-auto">
-              <li className="nav-brand">
+              <li className="nav-item">
                 <Link className="nav-link" to="/home">
                   Home
                 </Link>
