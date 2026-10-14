@@ -1,0 +1,14 @@
+
+> job-app-workspace@1.0.0 test:e2e
+> playwright test
+
+[WebServer] (node:17072) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 3 tests using 1 worker
+
+  ✓  1 e2e/workflow.spec.ts:2:1 › intake → search → detail → status → reload, edit, keyboard and mobile (1.4s)
+  ✓  2 e2e/workflow.spec.ts:92:1 › legacy routes, filters, pagination and confirmed reset (576ms)
+  ✓  3 e2e/workflow.spec.ts:119:1 › corrupt storage recovery and failed save stay truthful (482ms)
+
+  3 passed (3.3s)
