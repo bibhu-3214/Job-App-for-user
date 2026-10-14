@@ -1,3 +1,5 @@
+import PipelineScene from "./features/overview/PipelineScene";
+import ThemeControl from "./features/appearance/ThemeControl";
 import Modal from "./components/Modal";
 import CandidateList from "./features/candidates/CandidateList";
 import { formatDate as date } from "./lib/format";
@@ -48,6 +50,7 @@ export default function App() {
   const [selected, setSelected] = useState<string | null>(null);
   const [editing, setEditing] = useState(false);
   const [reset, setReset] = useState(false);
+  const [motionReplay, setMotionReplay] = useState(0);
   const location = useLocation();
   const navigate = useNavigate();
   const candidate = records.find((c) => c.id === selected);
@@ -176,12 +179,15 @@ export default function App() {
                   : "Candidates"}
             </strong>
           </div>
-          <span className="demo-label">
-            <i />
-            Demo workspace
-          </span>
+          <div className="topbar-actions">
+            <ThemeControl />
+            <span className="demo-label">
+              <i />
+              Demo workspace
+            </span>
+          </div>
         </header>
-        <main id="main">
+        <main id="main" key={location.pathname}>
           <div className="page-heading">
             <div>
               <div className="eyebrow">YOUR NEXT GREAT TEAM STARTS HERE</div>
@@ -301,7 +307,9 @@ export default function App() {
                             <Icon size={19} />
                           </span>
                         </div>
-                        <strong>{String(value).padStart(2, "0")}</strong>
+                        <strong key={value} className="metric-value">
+                          {String(value).padStart(2, "0")}
+                        </strong>
                         <small>{detail}</small>
                       </div>
                     ))}
@@ -327,19 +335,9 @@ export default function App() {
                           Review applications <ArrowRight size={17} />
                         </Link>
                       </div>
-                      <div className="orbit" aria-hidden="true">
-                        <div className="orbit-line one" />
-                        <div className="orbit-line two" />
-                        <div className="orbit-core">
-                          <Users size={38} />
-                        </div>
-                        <span className="orbit-person p1">AM</span>
-                        <span className="orbit-person p2">RC</span>
-                        <span className="orbit-person p3">JE</span>
-                        <span className="orbit-check">
-                          <Check size={19} />
-                        </span>
-                      </div>
+                      <PipelineScene
+                        onReplay={() => setMotionReplay((i) => i + 1)}
+                      />
                     </section>
                     <section className="panel pipeline">
                       <div className="section-heading">
@@ -358,6 +356,7 @@ export default function App() {
                           <div className="bar">
                             <span
                               className={s}
+                              key={`${s}-${motionReplay}`}
                               style={{
                                 width: `${records.length ? (counts[s] / records.length) * 100 : 0}%`,
                               }}

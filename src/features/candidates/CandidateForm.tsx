@@ -1,3 +1,4 @@
+import SelectControl from "../../components/SelectControl";
 import { useState } from "react";
 import { ArrowRight, Save } from "lucide-react";
 import { inputSchema, roles, type CandidateInput } from "./model";
@@ -94,11 +95,14 @@ export default function CandidateForm({
       </div>
       <label>
         Role
-        <select name="jobTitle" defaultValue={initial?.jobTitle ?? roles[0]}>
+        <SelectControl
+          name="jobTitle"
+          defaultValue={initial?.jobTitle ?? roles[0]}
+        >
           {roles.map((r) => (
             <option key={r}>{r}</option>
           ))}
-        </select>
+        </SelectControl>
       </label>
       <label>
         Skills

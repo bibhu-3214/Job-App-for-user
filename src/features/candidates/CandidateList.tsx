@@ -1,3 +1,4 @@
+import SelectControl from "../../components/SelectControl";
 import { useSearchParams } from "react-router-dom";
 import {
   Search,
@@ -57,7 +58,7 @@ export default function CandidateList({
             onChange={(e) => update("q", e.target.value)}
           />
         </label>
-        <select
+        <SelectControl
           aria-label="Filter by role"
           value={f.role}
           onChange={(e) => update("role", e.target.value)}
@@ -66,8 +67,8 @@ export default function CandidateList({
           {roles.map((r) => (
             <option key={r}>{r}</option>
           ))}
-        </select>
-        <select
+        </SelectControl>
+        <SelectControl
           aria-label="Filter by status"
           value={f.status}
           onChange={(e) => update("status", e.target.value)}
@@ -78,8 +79,8 @@ export default function CandidateList({
               {statusLabel(s)}
             </option>
           ))}
-        </select>
-        <select
+        </SelectControl>
+        <SelectControl
           aria-label="Sort candidates"
           value={f.sort}
           onChange={(e) => update("sort", e.target.value)}
@@ -88,7 +89,7 @@ export default function CandidateList({
           <option value="oldest">Oldest first</option>
           <option value="name">Name A–Z</option>
           <option value="experience">Experience</option>
-        </select>
+        </SelectControl>
       </div>
       <div className="table-scroll">
         <table>
@@ -106,7 +107,7 @@ export default function CandidateList({
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody key={params.toString()}>
             {shown.map((c, i) => (
               <tr key={c.id}>
                 <td>
@@ -129,7 +130,7 @@ export default function CandidateList({
                 </td>
                 <td>{c.experience} years</td>
                 <td>
-                  <span className={`badge ${c.status}`}>
+                  <span key={c.status} className={`badge ${c.status}`}>
                     <i />
                     {statusLabel(c.status)}
                   </span>
