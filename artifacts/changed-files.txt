@@ -1,0 +1,44 @@
+ .github/workflows/ci.yml                           |    27 +
+ .gitignore                                         |     5 +
+ README.md                                          |    99 +-
+ artifacts/build.log                                |    25 +
+ artifacts/candidate-detail.png                     |   Bin 0 -> 121964 bytes
+ artifacts/e2e.log                                  |    14 +
+ artifacts/intake-desktop.png                       |   Bin 0 -> 140251 bytes
+ artifacts/intake-mobile.png                        |   Bin 0 -> 96187 bytes
+ artifacts/overview-desktop.png                     |   Bin 0 -> 193730 bytes
+ artifacts/overview-mobile.png                      |   Bin 0 -> 139262 bytes
+ e2e/workflow.spec.ts                               |   149 +
+ eslint.config.js                                   |    27 +
+ index.html                                         |     1 +
+ package-lock.json                                  | 19779 ++++---------------
+ package.json                                       |    68 +-
+ playwright.config.ts                               |    21 +
+ public/index.html                                  |    28 -
+ src/App.css                                        |    38 -
+ src/App.js                                         |    43 -
+ src/App.tsx                                        |   559 +
+ src/Components/Dashboard Components/FrontEnd.js    |    83 -
+ src/Components/Dashboard Components/FullStack.js   |    80 -
+ src/Components/Dashboard Components/MeanStack.js   |    82 -
+ .../Dashboard Components/ModalComponent.js         |    25 -
+ src/Components/Dashboard Components/Node.js        |    83 -
+ src/Components/Dashboard.js                        |   181 -
+ src/Components/Home.js                             |    18 -
+ src/Components/Register.js                         |   169 -
+ src/components/Modal.tsx                           |    68 +
+ src/features/candidates/CandidateForm.tsx          |   146 +
+ src/features/candidates/CandidateList.tsx          |   189 +
+ src/features/candidates/model.ts                   |    80 +
+ src/features/candidates/repository.ts              |   100 +
+ src/index.css                                      |     5 -
+ src/index.js                                       |    16 -
+ src/lib/format.ts                                  |     6 +
+ src/main.tsx                                       |    12 +
+ src/styles.css                                     |  1204 ++
+ tests/candidates.test.ts                           |   141 +
+ tests/form.test.tsx                                |    32 +
+ tests/setup.ts                                     |     4 +
+ tsconfig.json                                      |    18 +
+ vite.config.ts                                     |    10 +
+ 43 files changed, 6863 insertions(+), 16772 deletions(-)
