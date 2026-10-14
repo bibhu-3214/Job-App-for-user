@@ -23,5 +23,6 @@ export default ts.config(
       "react-hooks/exhaustive-deps": "warn",
     },
   },
+  { files: ["public/*.js"], languageOptions: { globals: globals.browser } },
   { files: ["*.js"], languageOptions: { globals: globals.node } },
 );
