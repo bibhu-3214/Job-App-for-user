@@ -90,7 +90,7 @@ Baseline: `bcc63ca40e4b7a60f99197b263e736cd15aefea0` on `master`.
 
 CRA 4 / React 17 / Router 5 / Axios / Bootstrap CDN were replaced with Vite, React 19, TypeScript and current compatible Router dependencies. The legacy render-time fetches, duplicate role tables and stale mutation/details state were removed. Root `index.html` is now Vite's entry. Build output changes from `build/` to `dist/`; development changes from `npm start` to `npm run dev`. Future public build variables use `import.meta.env.VITE_*`, rather than `process.env.REACT_APP_*`. Never place secrets in either client environment format. No environment variables are required today.
 
-Routes: `/home` redirects to `/`, `/register` to `/intake`, and `/dashboard/*` to `/candidates`, preserving known role links (`frontend`, `nodejs`, `meanstack`, `fullstack`) as role filters. Other unknown routes redirect to overview. The future hosting configuration must serve `index.html` for non-asset application paths so deep links work. Hosting must be configured separately before a deliberate deployment; merging source changes is not a deployment-readiness claim.
+Routes: `/home` redirects to `/`, `/register` to `/intake`, and `/dashboard/*` to `/candidates`, preserving known role links (`frontend`, `nodejs`, `meanstack`, `fullstack`) as role filters. Other unknown routes redirect to overview. `public/_redirects` supplies Netlify’s `/* /index.html 200` SPA fallback. Vite copies it into `dist/`, and CI checks that the built rule matches the source. Existing assets are served normally while application routes resolve to `index.html`.
 
 The former HTTP Heroku API is disabled: there is no client or automatic request. Source-derived contracts, for migration planning only:
 
@@ -103,8 +103,10 @@ The former HTTP Heroku API is disabled: there is no client or automatic request.
 
 Legacy record fields: `_id`, name, email, phone, skills, jobTitle, experience, createdAt, status. Domain IDs now use `id`; a future adapter must explicitly map `_id`, validate data, normalize experience/dates, and handle server errors. Status values remain `applied`, `shortlisted`, `rejected` (`applied` is displayed as “In review”). There were no demonstrated server edit, delete or login endpoints; local profile editing is a demo feature, not a claim about remote support. A real integration needs a separately designed and approved HTTPS backend, authorization, data governance and tests.
 
-## Deployment boundary
+## Hosting and releases
 
-The repository retains an existing Netlify site association. This rebuild does not change its settings. Review commits, the PR title and the merge commit carry `[skip netlify]`, using [Netlify’s documented skip mechanism](https://docs.netlify.com/deploy/manage-deploys/manage-deploys-overview/#skip-a-deploy) to avoid publishing this change while GitHub Actions runs.
+The existing site is [userjobapp.netlify.app](https://userjobapp.netlify.app/), a manually deployed Netlify project with no linked Git repository. GitHub merges do not update it automatically. Publish only a verified `dist/` build to that existing project after deployment approval; no account, domain or repository-link changes are needed. The initial rebuild and routing fix retain `[skip netlify]` commit markers as a precaution for any future Git integration.
 
-The skip marker applies to these events only. A later unmarked commit can deploy all accumulated changes. Before any intended release, review the hosting build command, `dist/` output, SPA rewrite rules and the demo-only data boundary. Screenshots in this README are captured from isolated local browser tests; they are not evidence that the rebuilt application is live on the old hosting URL.
+Build with Node.js 22.12+ using `npm ci && npm run build`. Upload the contents of `dist/`, including `_redirects`, rather than the source directory or the former CRA `build/` directory. The site has automatic publishing enabled for manual uploads: uploading a production build replaces the public app. Verify `/`, `/candidates`, `/intake` and legacy redirects through direct visits and refreshes after every release.
+
+The hosted app remains a fictional-data demo with browser-local storage and no employer delivery. Screenshots above were captured in isolated browser tests. Repository CI validates the build; publication and live-site verification are separate release steps.
